@@ -13,6 +13,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
+
   :root {
     --font-heading: 'Manrope', sans-serif;
     --font-body: 'Inter', sans-serif;
@@ -26,140 +27,6 @@
     font-family: var(--font-body), sans-serif;
     min-height: 100%;
   }
-
-  /* ===================== Password gate ===================== */
-  #mr-gate {
-    position: fixed;
-    inset: 0;
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #000;
-    overflow: hidden;
-    padding: 24px;
-  }
-  #mr-gate .mr-gate-glow {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(110px);
-    pointer-events: none;
-    opacity: 0.35;
-    z-index: 0;
-    animation: mr-gate-drift 24s ease-in-out infinite;
-  }
-  #mr-gate .mr-gate-glow--1 { width: 480px; height: 480px; background: #F472B6; top: -120px; left: -120px; }
-  #mr-gate .mr-gate-glow--2 { width: 520px; height: 520px; background: #60A5FA; bottom: -160px; right: -140px; animation-direction: reverse; }
-  #mr-gate .mr-gate-glow--3 { width: 380px; height: 380px; background: #C084FC; top: 40%; left: 60%; animation-duration: 30s; }
-  @keyframes mr-gate-drift {
-    0%, 100% { transform: translate(0, 0); }
-    50% { transform: translate(50px, 30px); }
-  }
-
-  .mr-gate__panel {
-    position: relative;
-    z-index: 1;
-    width: 100%;
-    max-width: 380px;
-    text-align: center;
-  }
-  .mr-gate__wordmark {
-    font-family: var(--font-heading), serif;
-    font-style: italic;
-    font-weight: 600;
-    font-size: clamp(30px, 6vw, 42px);
-    margin: 0 0 10px;
-    background: linear-gradient(90deg, #F9A8D4, #93C5FD, #D8B4FE, #F9A8D4);
-    background-size: 300% auto;
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    animation: mr-gate-shimmer 7s ease-in-out infinite;
-    text-shadow: 0 0 40px rgba(216,180,254,0.25);
-  }
-  @keyframes mr-gate-shimmer {
-    0%   { background-position: 0% center; }
-    50%  { background-position: 100% center; }
-    100% { background-position: 0% center; }
-  }
-  .mr-gate__tagline {
-    font-size: 15px;
-    line-height: 1.6;
-    letter-spacing: 0.01em;
-    color: rgba(255,255,255,0.55);
-    margin: 0 0 36px;
-  }
-  .mr-gate__form {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-  }
-  .mr-gate__input {
-    width: 100%;
-    font-family: var(--font-body), sans-serif;
-    font-size: 16px;
-    text-align: center;
-    letter-spacing: 0.04em;
-    padding: 14px 16px;
-    border-radius: 10px;
-    border: 1px solid rgba(255,255,255,0.25);
-    background: rgba(255,255,255,0.05);
-    color: #fff;
-    outline: none;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
-  }
-  .mr-gate__input::placeholder { color: rgba(255,255,255,0.35); }
-  .mr-gate__input:focus {
-    border-color: rgba(216,180,254,0.7);
-    box-shadow: 0 0 0 3px rgba(216,180,254,0.18);
-  }
-  .mr-gate__input.mr-gate--shake {
-    animation: mr-gate-shake 0.4s ease;
-    border-color: rgba(244,114,182,0.8);
-  }
-  @keyframes mr-gate-shake {
-    0%, 100% { transform: translateX(0); }
-    20% { transform: translateX(-8px); }
-    40% { transform: translateX(8px); }
-    60% { transform: translateX(-6px); }
-    80% { transform: translateX(6px); }
-  }
-  .mr-gate__btn {
-    font-family: var(--font-body), sans-serif;
-    font-weight: 600;
-    font-size: 15px;
-    padding: 13px 24px;
-    border-radius: 10px;
-    border: 2px solid #fff;
-    background: transparent;
-    color: #fff;
-    cursor: pointer;
-    transition: background 0.15s ease, color 0.15s ease, transform 0.13s ease;
-  }
-  .mr-gate__btn:hover { background: #fff; color: #0d0a0a; transform: translateY(-2px); }
-  .mr-gate__error {
-    min-height: 18px;
-    font-size: 13px;
-    color: #F9A8D4;
-    margin: 2px 0 0;
-    opacity: 0;
-    transition: opacity 0.2s ease;
-  }
-  .mr-gate__error.mr-gate--visible { opacity: 1; }
-
-  #mr-gate.mr-gate--hidden {
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.6s ease;
-  }
-
-  #mr-content-root {
-    min-height: 100vh;
-    background: #000;
-    opacity: 0;
-    transition: opacity 0.5s ease;
-  }
-  #mr-content-root.mr-content--visible { opacity: 1; }
 
   .mr-hero {
     width: 100%;
@@ -181,43 +48,11 @@
       object-fit: contain;
     }
   }
-
-  @media (max-width: 480px) {
-    #mr-gate .mr-gate-glow { filter: blur(70px); }
-  }
 </style>
 </head>
 <body>
 
-  <div id="mr-gate" role="dialog" aria-modal="true" aria-label="Password required">
-    <div class="mr-gate-glow mr-gate-glow--1"></div>
-    <div class="mr-gate-glow mr-gate-glow--2"></div>
-    <div class="mr-gate-glow mr-gate-glow--3"></div>
-    <div class="mr-gate__panel">
-      <p class="mr-gate__wordmark">Mattarot</p>
-      <p class="mr-gate__tagline">Mattarot is transforming.<br>Good things take time. Talk soon. ♡</p>
-      <form class="mr-gate__form" id="mrGateForm" autocomplete="off">
-        <input
-          type="password"
-          class="mr-gate__input"
-          id="mrGatePassword"
-          placeholder="Enter password"
-          aria-label="Password"
-          autocomplete="off"
-          autocapitalize="off"
-          spellcheck="false"
-        >
-        <button type="submit" class="mr-gate__btn">Enter</button>
-        <p class="mr-gate__error" id="mrGateError">That's not quite it. Try again.</p>
-      </form>
-    </div>
-  </div>
-
-  <div id="mr-content-root"></div>
-
-  <script>
-  (function () {
-    var MR_CONTENT = `<div class="mr-hero">
+<div class="mr-hero">
   <img class="mr-hero__img" src="https://cdn.shopify.com/s/files/1/0017/1229/1862/files/HERO_3b19ab1c-1c37-46fc-8c8e-398a2d10a998.jpg?v=1786480556" alt="Mattarot" width="1600" height="900">
 </div>
 <div class="mattarot-page">
@@ -296,7 +131,31 @@
   </section>
 
   <!-- WHAT IT'S BECOME -->
-  <section class="mr-section mr-become mr-fade">
+  <!-- TIKTOK ROW -->
+  <section class="mr-videos mr-fade">
+    <div class="mr-videos__inner">
+      <p class="mr-videos__label">Watch</p>
+      <div class="mr-vidgrid">
+        <button type="button" class="mr-vid__card" data-video-id="7149015196105723141" aria-label="Play TikTok video">
+          <span class="mr-vid__play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="#12101a"/></svg></span>
+          <p class="mr-vid__cap">Archangel Michael</p>
+          <p class="mr-vid__meta">Tap to watch</p>
+        </button>
+        <button type="button" class="mr-vid__card" data-video-id="7075736621366168838" aria-label="Play TikTok video">
+          <span class="mr-vid__play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="#12101a"/></svg></span>
+          <p class="mr-vid__cap">Pack it up, demon breath.</p>
+          <p class="mr-vid__meta">Tap to watch</p>
+        </button>
+        <button type="button" class="mr-vid__card" data-video-id="7093472718183615750" aria-label="Play TikTok video">
+          <span class="mr-vid__play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="#12101a"/></svg></span>
+          <p class="mr-vid__cap">Some things we have to do on our own.</p>
+          <p class="mr-vid__meta">Tap to watch</p>
+        </button>
+      </div>
+    </div>
+  </section>
+
+    <section class="mr-section mr-become mr-fade">
     <div class="mr-section__inner">
       <h2 class="mr-heading">What <em class="mr-gradient">Mattarot</em> Has Become</h2>
       <p>Today, Mattarot lives on, not as a business, but as a creative and spiritual home. It's the space where Matt's love of mysticism, storytelling, and collaboration gets to exist without the pressure of a bottom line.</p>
@@ -306,7 +165,31 @@
   </section>
 
   <!-- TAROT PULL -->
-  <section class="mr-section mr-tarot mr-fade">
+  <!-- TIKTOK ROW -->
+  <section class="mr-videos mr-fade">
+    <div class="mr-videos__inner">
+      <p class="mr-videos__label">Watch</p>
+      <div class="mr-vidgrid">
+        <button type="button" class="mr-vid__card" data-video-id="7163244766480682246" aria-label="Play TikTok video">
+          <span class="mr-vid__play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="#12101a"/></svg></span>
+          <p class="mr-vid__cap">Don&#x27;t get comfy yet, the expansion isn&#x27;t done!</p>
+          <p class="mr-vid__meta">Tap to watch</p>
+        </button>
+        <button type="button" class="mr-vid__card" data-video-id="7135462915343158534" aria-label="Play TikTok video">
+          <span class="mr-vid__play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="#12101a"/></svg></span>
+          <p class="mr-vid__cap">Move forward fast and furious.</p>
+          <p class="mr-vid__meta">Tap to watch</p>
+        </button>
+        <button type="button" class="mr-vid__card" data-video-id="7179598776963845381" aria-label="Play TikTok video">
+          <span class="mr-vid__play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="#12101a"/></svg></span>
+          
+          <p class="mr-vid__meta">Tap to watch</p>
+        </button>
+      </div>
+    </div>
+  </section>
+
+    <section class="mr-section mr-tarot mr-fade">
     <div class="mr-section__inner">
 
       <svg class="mt-icons" aria-hidden="true">
@@ -370,7 +253,31 @@
   </section>
 
   <!-- CLOSING NOTE + KEEP IN TOUCH -->
-  <section class="mr-section mr-closing mr-fade">
+  <!-- TIKTOK ROW -->
+  <section class="mr-videos mr-fade">
+    <div class="mr-videos__inner">
+      <p class="mr-videos__label">Watch</p>
+      <div class="mr-vidgrid">
+        <button type="button" class="mr-vid__card" data-video-id="7108726659636940038" aria-label="Play TikTok video">
+          <span class="mr-vid__play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="#12101a"/></svg></span>
+          <p class="mr-vid__cap">Understand the cards to understand the message.</p>
+          <p class="mr-vid__meta">Tap to watch</p>
+        </button>
+        <button type="button" class="mr-vid__card" data-video-id="7150017654898707718" aria-label="Play TikTok video">
+          <span class="mr-vid__play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="#12101a"/></svg></span>
+          <p class="mr-vid__cap">The light has already won.</p>
+          <p class="mr-vid__meta">Tap to watch</p>
+        </button>
+        <button type="button" class="mr-vid__card" data-video-id="7142934991389953285" aria-label="Play TikTok video">
+          <span class="mr-vid__play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="#12101a"/></svg></span>
+          <p class="mr-vid__cap">Keep shining bright.</p>
+          <p class="mr-vid__meta">Tap to watch</p>
+        </button>
+      </div>
+    </div>
+  </section>
+
+    <section class="mr-section mr-closing mr-fade">
     <div class="mr-section__inner">
 
       <p class="mr-closing__text">If you booked a reading with me years ago, this is for you. Thank you for letting me into your world and trusting me with your journey. I believe in you. Keep shining your light, and stay true on your path. <span class="mr-heart-inline" aria-hidden="true">&#9825;</span></p>
@@ -410,6 +317,56 @@
 </div>
 
 <style>
+  /* ===================== TikTok cards ===================== */
+  .mr-videos { position: relative; z-index: 2; padding: 8px 24px 40px; }
+  .mr-videos__inner { max-width: 760px; margin: 0 auto; }
+  .mr-videos__label {
+    text-align: center; margin: 0 0 24px;
+    font-family: var(--font-heading), sans-serif; font-style: italic; font-weight: 600;
+    font-size: 15px; letter-spacing: 0.06em;
+    background: linear-gradient(90deg, #F9A8D4, #93C5FD, #D8B4FE, #F9A8D4);
+    background-size: 300% auto; -webkit-background-clip: text; background-clip: text;
+    color: transparent; animation: mr-shimmer 7s ease-in-out infinite;
+  }
+  .mr-vidgrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+  .mr-vid__card {
+    position: relative; width: 100%; aspect-ratio: 3 / 4;
+    border-radius: 14px; border: 1px solid rgba(255,255,255,0.14);
+    background:
+      radial-gradient(circle at 30% 18%, rgba(244,114,182,0.18), transparent 55%),
+      radial-gradient(circle at 75% 78%, rgba(192,132,252,0.18), transparent 55%),
+      radial-gradient(circle at 50% 50%, rgba(96,165,250,0.10), transparent 70%),
+      rgba(255,255,255,0.03);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 14px; padding: 20px 16px; cursor: pointer; overflow: hidden;
+    animation: mr-img-glow 5s ease-in-out infinite;
+    transition: transform 0.3s ease;
+    font: inherit; color: inherit; text-align: center;
+  }
+  .mr-vid__card:hover { transform: translateY(-3px); }
+  .mr-vid__card:focus-visible { outline: 2px solid rgba(255,255,255,0.7); outline-offset: 3px; }
+  .mr-vid__play {
+    width: 52px; height: 52px; border-radius: 50%; flex: none;
+    background: linear-gradient(135deg, #F9A8D4, #93C5FD, #D8B4FE);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 0 24px rgba(249,168,212,0.5);
+  }
+  .mr-vid__play svg { width: 20px; height: 20px; margin-left: 3px; }
+  .mr-vid__cap {
+    font-family: var(--font-heading), sans-serif; font-size: 14px; line-height: 1.45;
+    color: rgba(255,255,255,0.9); margin: 0;
+  }
+  .mr-vid__meta {
+    font-family: var(--font-heading), sans-serif; font-size: 11px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: rgba(255,255,255,0.5); margin: 0;
+  }
+  .mr-vid__loaded { grid-column: 1 / -1; display: flex; justify-content: center; }
+  .mr-vid__loaded blockquote { margin: 0 !important; }
+  @media (max-width: 760px) {
+    .mr-vidgrid { grid-template-columns: minmax(0, 1fr); max-width: 300px; margin: 0 auto; }
+    .mr-videos { padding-bottom: 24px; }
+  }
+
   .mattarot-page { position: relative; background: #000; color: #fff; font-family: inherit; overflow: hidden; }
   .mattarot-page * { box-sizing: border-box; }
 
@@ -759,7 +716,7 @@
 
     items.forEach(revealIfAlreadyVisible);
   })();
-<\/script>
+</script>
 
 <script>
   (function () {
@@ -982,7 +939,7 @@
   {
     "title": "Eight of Cups",
     "icon": "icon-cups",
-    "text": "It's okay to walk away from something that no longer fits, even if it once meant everything to you."
+    "text": "It's okay to go look for something that feels missing, even if it means leaving what you know behind."
   },
   {
     "title": "Nine of Cups",
@@ -1047,7 +1004,7 @@
   {
     "title": "Seven of Swords",
     "icon": "icon-swords",
-    "text": "Something isn't fully honest right now, possibly with yourself. A little more transparency will lighten the load."
+    "text": "Deceit will ultimately hold you back. A little more transparency will make things easier."
   },
   {
     "title": "Eight of Swords",
@@ -1186,7 +1143,7 @@
     card.addEventListener("click", draw);
     drawBtn.addEventListener("click", draw);
   })();
-<\/script>
+</script>
 
 <script>
   (function () {
@@ -1246,102 +1203,29 @@
       audio.currentTime = 0;
     });
   })();
-<\/script>`;
+</script>
 
-    var PASSWORD = 'shineyourlight';
-    var STORAGE_KEY = 'mr_unlocked';
-
-    var gate = document.getElementById('mr-gate');
-    var form = document.getElementById('mrGateForm');
-    var input = document.getElementById('mrGatePassword');
-    var errorEl = document.getElementById('mrGateError');
-    var root = document.getElementById('mr-content-root');
-
-    function isUnlockedThisSession() {
-      try {
-        return sessionStorage.getItem(STORAGE_KEY) === 'true';
-      } catch (e) {
-        return false;
-      }
-    }
-
-    function rememberUnlock() {
-      try {
-        sessionStorage.setItem(STORAGE_KEY, 'true');
-      } catch (e) {
-        // storage blocked (private browsing, etc.) — degrade gracefully,
-        // the visitor will just be asked again on the next reload.
-      }
-    }
-
-    function revealContent() {
-      root.innerHTML = MR_CONTENT;
-
-      // innerHTML-inserted <script> tags don't execute automatically, so
-      // each one is recreated and re-inserted here to run in order.
-      var oldScripts = root.querySelectorAll('script');
-      for (var i = 0; i < oldScripts.length; i++) {
-        var oldScript = oldScripts[i];
-        var newScript = document.createElement('script');
-        for (var j = 0; j < oldScript.attributes.length; j++) {
-          var attr = oldScript.attributes[j];
-          newScript.setAttribute(attr.name, attr.value);
-        }
-        newScript.textContent = oldScript.textContent;
-        oldScript.parentNode.replaceChild(newScript, oldScript);
-      }
-
-      gate.classList.add('mr-gate--hidden');
-
-      // Double rAF so the browser registers the starting opacity:0 before
-      // the class flips, otherwise the transition can get skipped and the
-      // content just pops in instead of fading in smoothly.
-      requestAnimationFrame(function () {
-        requestAnimationFrame(function () {
-          root.classList.add('mr-content--visible');
-        });
-      });
-
-      setTimeout(function () {
-        if (gate && gate.parentNode) {
-          gate.parentNode.removeChild(gate);
-        }
-      }, 650);
-    }
-
-    function showError() {
-      errorEl.classList.add('mr-gate--visible');
-      input.classList.add('mr-gate--shake');
-      input.value = '';
-      input.focus();
-      setTimeout(function () {
-        input.classList.remove('mr-gate--shake');
-      }, 400);
-    }
-
-    function attemptUnlock() {
-      var entered = (input.value || '').trim().toLowerCase();
-      if (entered === PASSWORD) {
-        rememberUnlock();
-        revealContent();
-      } else {
-        showError();
-      }
-    }
-
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      attemptUnlock();
+<script>
+  (function () {
+    document.addEventListener('click', function (e) {
+      var btn = e.target && e.target.closest ? e.target.closest('.mr-vid__card') : null;
+      if (!btn) return;
+      var id = btn.getAttribute('data-video-id');
+      var holder = document.createElement('div');
+      holder.className = 'mr-vid__loaded';
+      holder.innerHTML =
+        '<blockquote class="tiktok-embed" cite="https://www.tiktok.com/@mattarot.tv/video/' + id + '" ' +
+        'data-video-id="' + id + '" style="max-width:605px;min-width:300px;">' +
+        '<section><a target="_blank" rel="noopener" href="https://www.tiktok.com/@mattarot.tv?refer=embed">@mattarot.tv</a></section>' +
+        '</blockquote>';
+      btn.parentNode.replaceChild(holder, btn);
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.tiktok.com/embed.js';
+      document.body.appendChild(s);
     });
-
-    if (isUnlockedThisSession()) {
-      gate.style.display = 'none';
-      revealContent();
-    } else {
-      input.focus();
-    }
   })();
-  </script>
+</script>
 
 </body>
 </html>
